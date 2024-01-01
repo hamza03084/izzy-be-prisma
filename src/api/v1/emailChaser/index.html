@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Template</title>
+    <style>
+      span {
+        font-size: large;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 50px 40px;
+      "
+    >
+      <h3>Dear `${Customer Name}`</h3>
+
+      <div>
+        I'm Izzy, an automated Accounts Receivable Assistant at AIME. My
+        objective is to help businesses efficiently manage outstanding invoices,
+        automate payment requests, resolve disputes, and optimise cash flow.
+      </div>
+
+      <div>
+        Please find attached an invoice
+        <span>`${InvoiceNumber}`</span>
+        that requires your attention.
+      </div>
+
+      <div>
+        Kindly make the payment of <span>`${Amount}`</span> within
+        <span>` ${TermDays}`</span> from this email, as per our contractual
+        terms.
+      </div>
+
+      <div>
+        If you have any questions or need assistance, feel free to contact me
+        directly at `${ContactInformation}`.
+      </div>
+
+      <div>
+        Thank you for your attention. Your prompt payment is greatly
+        appreciated, enabling us to maximise cash flow an maintain excellent
+        service.
+      </div>
+
+      <div>
+        Best regards, <br />
+        Izzy
+      </div>
+
+      <span>
+        Accounts Receivable Assistant, <br />
+        AIME
+      </span>
+    </div>
+  </body>
+</html>

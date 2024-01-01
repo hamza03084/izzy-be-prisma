@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  Int       @id @default(autoincrement())
+  firstName           String
+  lastName            String
+  email               String    @unique
+  password            String
+  businessName        String?
+  companySize         String?
+  industry            String?
+  teamMembers         String[]  @default([""])
+  createdAt           DateTime  @default(now()) @map("created_at")
+  updatedAt           DateTime  @updatedAt @map("updated_at")
+  resetToken          String?
+  resetTokenExpiresAt DateTime?
+}
+
+model Chasertemplate {
+  id          Int            @id @default(autoincrement())
+  title       String
+  emailChaser Emailchaser[]
+  invoice     InvoiceSchema?
+  client      ClientSchema[]
+}
+
+model Emailchaser {
+  id              Int            @id @default(autoincrement())
+  template_id     Int
+  subject         String         @default("no subject")
+  email_body      String         @default("Customer Name <br/>I'm Izzy, an automated Accounts Receivable Assistant at AIME. My objective is to help businesses efficiently manage outstanding invoices, automate payment requests, resolve disputes, and optimise cash flow.<br/><br/>Please find attached an invoice InvoiceNumber that requires your attention.<br/><br/>Kindly make the payment of Amount within TermDays from this email, as per our contractual terms.<br/><br/>If you have any questions or need assistance, feel free to contact me directly at ContactInformation.<br/><br/>Thank you for your attention. Your prompt payment is greatly appreciated, enabling us to maximise cash flow and maintain excellent service.<br/><br/>Best regards, Izzy<br/>Accounts Receivable Assistant, AIME")
+  active          Boolean        @default(false)
+  chaser_template Chasertemplate @relation(fields: [template_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model InvoiceSchema {
+  id              Int            @id @default(autoincrement())
+  template_id     Int            @unique
+  invoice_number  Int
+  amount          Int
+  term_days       Int
+  contact_info    String
+  customer_name   String
+  email           String
+  createdAt       DateTime       @default(now()) @map("created_at")
+  updatedAt       DateTime       @updatedAt @map("updated_at")
+  chaser_template Chasertemplate @relation(fields: [template_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model ClientSchema {
+  id              Int            @id @default(autoincrement())
+  company_name    String
+  template_id     Int
+  emails          Int            @default(0)
+  chaser_template Chasertemplate @relation(fields: [template_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
