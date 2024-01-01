@@ -1,0 +1,35 @@
+{
+  "name": "izzy-ar-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "npm run prisma:generate&&nodemon server.js",
+    "prisma:generate": "prisma generate"
+  },
+  "author": "Shakir",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-scheduler": "^3.462.0",
+    "@prisma/client": "^5.5.2",
+    "aws-sdk": "^2.1509.0",
+    "axios": "^1.6.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "joi": "^17.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "moment": "^2.29.4",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.7",
+    "stripe": "^14.5.0",
+    "xero-node": "^4.36.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "prisma": "^5.5.2"
+  }
+}
